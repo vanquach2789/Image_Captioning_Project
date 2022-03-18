@@ -1,4 +1,5 @@
 # Image Captioning Project
+Authors: Thai Hoang, Van Quach
 
 # Abstract
 Image Captioning, which can be defined as automatically generating textual description of an image, is a task very close the the heart of scene understanding - one of the primary goals of computer vision. It combines the knowledge of both computer vision and natural language processing since it requires solving the problem of determining objects within an image as well as expressing the relationships of those objects in natural language. Also, image captioning is believed to help in the process of developing assistive technologies that eliminate technology barriers for visually impaired people.
