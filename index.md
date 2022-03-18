@@ -150,11 +150,13 @@ We used BLEU4 score to evaluate our model. After 50 epochs, our BLEU4 score ende
 </p>
 
 # Demo
-![plane_demo.png](./images/plane_demo.png)
+![plane_demo.png](./images/demo_plane.png)
 
 ![demo2.png](./images/demo2.png)
 
 ![demo1.png](./images/demo1.png)
+
+![demo0.png](./images/demo0.png)
 
 # Conclusion
 
