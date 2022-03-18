@@ -2,15 +2,36 @@
 Authors: Thai Hoang, Van Quach
 
 # Abstract
-Image Captioning, which can be defined as automatically generating textual description of an image, is a task very close the the heart of scene understanding - one of the primary goals of computer vision. It combines the knowledge of both computer vision and natural language processing since it requires solving the problem of determining objects within an image as well as expressing the relationships of those objects in natural language. Also, image captioning is believed to help in the process of developing assistive technologies that eliminate technology barriers for visually impaired people.
-
-In this project, our team will create a neural network architecture to automatically generate captions from images.
+In today's world, the interaction of images and text can be used to accomplish a variety of tasks. On the one hand, adding text to images can make them considerably more readable for both humans and computers. Image captioning, which is described as the task of automatically creating written descriptions for images, could help to improve this experience. Because it necessitates tackling the challenge of determining items inside an image as well as conveying the relationships between those things in natural language, it combines expertise of both computer vision and natural language processing. Image captioning is also thought to aid in the development of assistive devices that remove technological hurdles for visually impaired persons.
 
 # Related Work
+There have been several models designed to extract patterns from photos throughout history. The Convolutional Neural Network [citation] is one of the major phases in extracting features from images as it allows the model to collect local information. 
 
-## Model Architecture
-Several methods have been proposed for generating image
-descriptions. Many of these methods are based on recurrent neural networks and inspired by the successful use of sequence to sequence training with neural networks for machine translation (Cho et al., 2014;Bahdanau et al., 2014;
+A big move from the past is transfer learning. Transfer learning allows us to apply pre-trained models for our specific purpose [reference transfer learning]. We use the pretrained model ResNet 101 [citation] in our study because it has demonstrated its capacity to perform numerous vision-related tasks.
+
+In terms of language processing, recurrent models demonstrate the ability to cope with sequences of varying lengths. LSTM is a good option to mention since it deals with both long-term and short-term dependencies within a sequence, making it a good model for extracting information from languages for a variety of purposes, including language generation [cite LSTM].
+
+Finally, the encoder-decoder mechanism [citation for encoder-decoder] enables the ability to connect distinct parts together to form a greater task. The release of the encoder-decoder techniques opens the path for a lots of tasks, including connecting "vision" and "languages" together.
+
+
+# Dataset
+In our project, we used the "Common Objects in Context" (COCO) 2014 dataset for images and Karpathy's split for captions.
+
+The COCO dataset contains 164K images, which were divided into training data, validation data, and testing data as 83K/41K/41K. Each image is a three-channel RGB image of an object from one of 91 subcategories. categories. The dataset can be downloaded at: [https://cocodataset.org/#download].
+
+As for captions, we used Karpathy's split, as it is a better format than the original COCO captions. This split was made by Karpathy and Li (2015), which divided the COCO 2014 validation data into new validation and test sets of 5000 images, as well as a "restval" set that contained the remaining approximately 30k images. Annotations are present on every split. Therefore, the .json file we got from Karpathy's split will act as "annotations". The "annotations" portion can be downloaded here: [http://cs.stanford.edu/people/karpathy/deepimagesent/caption_datasets.zip]
+
+
+# Model Architecture
+Here, we use the encoder-decoder mechanism by using the encoder to get the abstracted features from the images, then using the decoder to learn the languages and connect language with the images. An overal view of our moodel is shown below:
+[Diagram of model]
+
+## Encoder
+For encoder, we use a block of pretrained ResNet with its linear and pool layers removed (as we do not need the classification task) followed by a adaptive pool layer to resize our latent features to a particular size. Using this architecture, our encoder would outputs "images" of dimension (2048, 14, 14).
+
+## Decoder
+
+Several methods have been proposed for generating image descriptions. Many of these methods are based on recurrent neural networks and inspired by the successful use of sequence to sequence training with neural networks for machine translation (Cho et al., 2014;Bahdanau et al., 2014;
 Sutskever et al., 2014). One major reason image caption
 generation is well suited to the encoder-decoder framework
 (Cho et al., 2014) of machine translation is because it is
@@ -18,20 +39,6 @@ analogous to “translating” an image to a sentence.
 
 Thus, the task of image captioning can be logically divided into two parts where the first part is an image-based model that is responsible for extracting the features and nuances of an image, and the second part is a language-based model that translates the objects and features given by the image-based model to a natural sentence. (*)
 
-## Dataset
-
-The datasets we will use are MS COCO dataset for images and Karpathy's split for captions.
-
-MS COCO dataset is a publicly available large-scale dataset that are usually used in object detection, segmentation, and image captioning. Its original version, which contains images, bounding boxes, labels, and captions, are split by Karpathy and Li (2015), leading to the appearance of Karpathy's split. This effectively divides the original COCO 2014 validation data into new 5000-image validation and test sets, plus a "restval" set containing the remaining ~30k images. All splits have caption annotations. Thus, the .json file that we got from Karpathy's split will be used as "annotations" for us. 
-
-The train set can be downloaded here:
-http://images.cocodataset.org/zips/train2014.zip
-
-The validation set can be downloaded here:
-http://images.cocodataset.org/zips/val2014.zip
-
-The "annotations" portion can be downloaded here:
-http://cs.stanford.edu/people/karpathy/deepimagesent/caption_datasets.zip
 
 # Concepts
 - Encoder-Decoder architecture: An Encoder is used to encode the input into a fixed form that the machine can use and an Decoder is used to decode that input, word by word, into a sequence.
